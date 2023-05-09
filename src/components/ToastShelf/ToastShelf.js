@@ -1,5 +1,5 @@
 //packages
-import React from 'react';
+import React, { useContext } from 'react';
 
 //components
 import Toast from '../Toast';
@@ -7,11 +7,20 @@ import Toast from '../Toast';
 //styles
 import styles from './ToastShelf.module.css';
 
+//context
+import { ToastContext } from '../ToastProvider/ToastProvider';
 
-function ToastShelf({ toasts, handleDismiss }) {
+
+function ToastShelf({ handleDismiss }) {
+  
+  const { toasts  } = useContext(ToastContext)
 
   return (
-    <ol className={styles.wrapper}>
+    <ol
+      className={styles.wrapper}
+      role="region"
+      aria-live="polite"
+    >
       {toasts?.map((toast) => (
         <li
           key={toast.id}
